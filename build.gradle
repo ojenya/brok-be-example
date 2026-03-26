@@ -1,0 +1,65 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5' apply false
+    id 'io.spring.dependency-management' version '1.1.4' apply false
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        mavenCentral()
+    }
+
+    group = 'com.brok'
+    version = '0.0.1'
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+
+    bootJar {
+        archiveFileName.set(project.name + '.jar')
+    }
+}
+
+// Копирование собранных JAR в brok-demo/jars для Electron
+tasks.register('copyJarsToDemo') {
+    dependsOn ':brok-core:bootJar', ':brok-bpm:bootJar', ':brok-context:bootJar'
+    doLast {
+        def targetDir = file("${rootProject.projectDir}/../brok-demo/jars")
+        targetDir.mkdirs()
+        copy {
+            from project(':brok-core').tasks.bootJar.outputs.files
+            into targetDir
+        }
+        copy {
+            from project(':brok-bpm').tasks.bootJar.outputs.files
+            into targetDir
+        }
+        copy {
+            from project(':brok-context').tasks.bootJar.outputs.files
+            into targetDir
+        }
+        println "JARs скопированы в ${targetDir}"
+    }
+}

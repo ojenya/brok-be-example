@@ -1,0 +1,47 @@
+openapi: 3.0.3
+info:
+  title: Brok Core API
+  version: 0.0.1
+paths:
+  /core/api/hello:
+    get:
+      tags:
+        - Demo
+      summary: Hello message from core
+      operationId: getHello
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HelloResponse'
+  /core/api/status:
+    get:
+      tags:
+        - Demo
+      summary: Status from core
+      operationId: getStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+components:
+  schemas:
+    HelloResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+    StatusResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string

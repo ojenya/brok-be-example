@@ -1,0 +1,4 @@
+rootProject.name = 'brok-be-example'
+include 'brok-core'
+include 'brok-bpm'
+include 'brok-context'
