@@ -1,0 +1,12 @@
+name: bugfix
+description: Investigate and fix a Paperclip bug task using Archon orchestration and OpenCode execution
+
+nodes:
+  - id: plan
+    command: opencode-plan
+    context: fresh
+
+  - id: fix
+    command: opencode-bugfix
+    depends_on: [plan]
+    context: fresh
