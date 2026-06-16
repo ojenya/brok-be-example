@@ -1,0 +1,7 @@
+name: smoke
+description: Fast smoke test for Paperclip runner using a single OpenCode step
+
+nodes:
+  - id: implement
+    command: opencode-smoke
+    context: fresh

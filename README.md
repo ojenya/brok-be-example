@@ -77,3 +77,5 @@ JAR-файлы будут созданы в директориях `build/libs/`
 - Spring Web
 - Spring Actuator
 - Java 17
+
+This project has been verified as normalized-ok.
