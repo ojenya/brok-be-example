@@ -1,0 +1,12 @@
+name: feature
+description: Implement a Paperclip feature task using Archon orchestration and OpenCode execution
+
+nodes:
+  - id: plan
+    command: opencode-plan
+    context: fresh
+
+  - id: implement
+    command: opencode-implement
+    depends_on: [plan]
+    context: fresh

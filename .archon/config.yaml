@@ -1,0 +1,21 @@
+assistant: opencode
+
+assistants:
+  opencode:
+    model: opencode-go/deepseek-v4-flash
+
+commands:
+  folder: .archon/commands
+  autoLoad: true
+
+worktree:
+  baseBranch: main
+  copyFiles:
+    - .env.example
+
+docs:
+  path: docs
+
+defaults:
+  loadDefaultCommands: true
+  loadDefaultWorkflows: false
